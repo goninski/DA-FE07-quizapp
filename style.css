@@ -1,7 +1,7 @@
 @import url("assets/fonts/fonts.css");
 @import url("styles/fw-presets.css");
-/*@import url("styles/fw-classes.css");*/
 @import url("node_modules/bootstrap/dist/css/bootstrap.min.css");
+/*@import url("styles/fw-classes.css");*/
 @import url("styles/assets.css");
 
 
@@ -58,6 +58,21 @@ h3 {
 }
 h4 {
     font-size: var(--fs-text-lg);
+}
+
+#resultWrapper img {
+    object-fit: contain;
+    height: 280px;
+    width: auto;
+}
+.choiceWrapper {
+    cursor: pointer;
+}
+#choicesWrapper.disabled .choiceWrapper {
+    cursor: auto;
+}
+.choiceWrapper.anim-pulse {
+    animation: pulse 500ms 2;
 }
 
 

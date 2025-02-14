@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz App</title>
     <link rel="stylesheet" href="style.css">
-    <script src="scripts/db.js"></script>
+    <script src="scripts/data.js"></script>
     <script src="scripts/templates.js"></script>
     <script src="script.js"></script>
 </head>
 
-<body onload="renderBody()">
+<body onload="init()">
 
     <header class="section">
        <div class="ct-container py-4">
@@ -24,43 +24,24 @@
        </div>
     </header>
 
-    <main>
-        <section>
-            <div class="ct-container">
+    <main class="section">
+        <div class="ct-container rounded p-5 bg-light">
 
-                <div class="card-wrapper d-flex flex-column gap-2 rounded p-5 bg-light">
-                    <div class="question fw-bold mb-3">Frage ? ...</div>
+            <div id="playWrapper" class="d-flex flex-column gap-4">
+                <div id="question" class="fw-bold"></div>
 
-                    <div class="choices-wrapper d-flex flex-row gap-3 border rounded p-2 align-items-center">
-                        <div class="choice-no bg-dark text-light py-1 px-3 rounded">A</div>
-                        <div class="choice-text">Antwort A</div>
-                    </div>
-                    <div class="choices-wrapper d-flex flex-row gap-3 border rounded p-2 align-items-center">
-                        <div class="choice-no bg-dark text-light py-1 px-3 rounded">A</div>
-                        <div class="choice-text">Antwort A</div>
-                    </div>
-                    <div class="choices-wrapper d-flex flex-row gap-3 border rounded p-2 align-items-center">
-                        <div class="choice-no bg-dark text-light py-1 px-3 rounded">A</div>
-                        <div class="choice-text">Antwort A</div>
-                    </div>
-                    <div class="choices-wrapper d-flex flex-row gap-3 border rounded p-2 align-items-center">
-                        <div class="choice-no bg-dark text-light py-1 px-3 rounded">A</div>
-                        <div class="choice-text">Antwort A</div>
-                    </div>
+                <div id="choicesWrapper" class="d-flex flex-column gap-2"></div>
 
-                    <div class="question-nav d-flex align-items-center justify-content-between mt-3">
-                        <div class="question-pos d-flex gap-2">
-                            Frage <b>1</b>von<b>5</b>
-                        </div>
-                        <button class="btn btn-dark">Nächste Frage</button>
-                    </div>
-                    
+                <div id="questionNav" class="questionNav d-flex align-items-center justify-content-between">
                 </div>
-
-
             </div>
-        </section>
 
+            <div id="resultWrapper" class="d-flex flex-column gap-5 align-items-center" style="display: none !important;">
+                <img class="trophy" src="assets/img/tropy.png" alt="trophy">
+                Du hast xx Fragen von xxx richtig beantwortet
+            </div>
+
+        </div>
     </main>
 
     <footer class="section py-3">

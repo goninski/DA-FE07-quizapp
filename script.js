@@ -1,111 +1,84 @@
-let bookTitleLiked = '';
-let bookTitlesLiked = [];
-
-function renderBody() {
-    renderBooks();
+function init() {
+    renderQuestion(0);
 }
 
-function renderBooks() {
-    updateBookLikesFromStorage();
-    let booksListingRef = document.getElementById('booksListing');
-    booksListingRef.innerHTML = '';
-    for (bookIndex = 0; bookIndex < books.length; bookIndex++) {
-        booksListingRef.innerHTML += getBookItemTemplate(bookIndex);
-        renderBookComments(bookIndex);
+function renderQuestion(currentQuestion) {
+    currentQuestion++;
+    questionIndex = currentQuestion - 1;
+    renderQuestionText(questionIndex);
+    renderChoices(questionIndex);
+    renderQuestionNav(questionIndex);
+}
+
+function renderQuestionText(questionIndex) {
+    let questionRef = document.getElementById('question');
+    questionRef.innerHTML = questions[questionIndex].question;
+}
+
+function renderChoices(questionIndex) {
+    let choicesWrapperRef = document.getElementById('choicesWrapper');
+    choicesWrapperRef.innerHTML = '';
+    getQuestionArray(questionIndex);
+    for (choiceIndex = choiceStartIndex; choiceIndex < questionArr.length; choiceIndex++) {
+        choiceNo = choiceIndex - choiceIndexOffset;
+        choiceText = questionObj['choice_' + choiceNo];
+        choicesWrapperRef.innerHTML += getChoicesTemplate(choiceNo, choiceText);
+        let choiceWrapperRef = document.getElementById('choiceWrapper-' + choiceNo);
+        choicesWrapperRef.classList.remove('disabled');
+        choiceWrapperRef.classList.remove('bg-success');
+        choiceWrapperRef.classList.remove('bg-danger');
+        choiceWrapperRef.classList.remove('anim-pulse');
     }
 }
 
-function renderBookComments(bookIndex) {
-    bookComments = books[bookIndex].comments;
-    let bookCommentsListingRef = document.getElementById('bookCommentsListing-' + bookIndex);
-    bookCommentsListingRef.innerHTML = '';
-    for (let commentIndex = 0; commentIndex < bookComments.length; commentIndex++) {
-        bookCommentsListingRef.innerHTML += getBookCommentsTemplate(bookIndex, bookComments, commentIndex);
-    }
+function renderQuestionNav(questionIndex) {
+    let questionNavRef = document.getElementById('questionNav');
+    questionNavRef.innerHTML = getQuestionNavTemplate(questionIndex + 1);
 }
 
-function addBookComment(bookIndex, event) {
-    bookComments = books[bookIndex].comments;
-    bookCommentName = "Goninski";
-    bookCommentRef = document.getElementById('bookCommentInput-' + bookIndex);
-    bookComment = bookCommentRef.value;
-    if(bookComment) {
-        bookCommentRef.required = false;
-        let obj = {"name": bookCommentName, "comment": bookComment};
-        bookComments.unshift(obj);
-        renderBookComments(bookIndex);
-        bookCommentRef.value = '';
-        event.preventDefault();
-    }
+function getQuestionArray(questionIndex) {
+    questionObj = questions[questionIndex];
+    questionArr = Object.keys(questionObj);
 }
 
-function updateBookLikesFromStorage() {
-    bookTitlesLiked = getBookLikesFromStorage();
-    if( bookTitlesLiked.length == 0) {
-        bookTitlesLiked = [];
-        return bookTitlesLiked;
-    }
-    for (let index = 0; index < bookTitlesLiked.length; index++) {
-        bookIndex = books.findIndex(element => element.name === bookTitlesLiked[index]);
-        if(bookIndex >= 0) {
-            books[bookIndex].liked = true;
-        }
-    }
-}
-
-function getBookLikesFromStorage() {
-    let storageStr = localStorage.getItem("bookTitlesLiked");
-    bookTitlesLiked = JSON.parse(storageStr);
-    if(! bookTitlesLiked) {
-        bookTitlesLiked = [];
-    }
-    return bookTitlesLiked;
-}
-
-function toggleBookLikeStatus(bookIndex) {
-    bookLikeStatus = books[bookIndex].liked;
-    if(bookLikeStatus) {
-        bookLikeStatus = false;
+function validateUserChoice(choiceNo) {
+    let choiceWrapperRef = document.getElementById('choiceWrapper-' + choiceNo);
+    correctChoice = questionObj.correctChoice;
+    if(correctChoice == choiceNo) {
+        updatesOnCorrectChoice(choiceWrapperRef);
     } else {
-        bookLikeStatus = true;
+        updatesOnFalseChoice(choiceWrapperRef, correctChoice);
     }
-    books[bookIndex].liked = bookLikeStatus;
-    saveBookLikesToStorage(bookIndex, bookLikeStatus);
-    toggleBookLikeIcon(bookIndex, bookLikeStatus);
-    toggleBookLikeQty(bookIndex, bookLikeStatus);
+    let btnNextRef = document.getElementById('btnNext');
+    btnNextRef.disabled = false;
 }
 
-function toggleBookLikeQty(bookIndex, bookLikeStatus) {
-    bookLikes = books[bookIndex].likes;
-    let qty = -1;
-    if(bookLikeStatus) {
-            qty = 1;
-    }
-    bookLikes = bookLikes + qty;
-    books[bookIndex].likes = bookLikes
-    document.getElementById('bookLikes-' + bookIndex).innerHTML = bookLikes;
+function updatesOnCorrectChoice(choiceWrapperRef) {
+    let choicesWrapperRef = document.getElementById('choicesWrapper');
+    choicesWrapperRef.classList.add('disabled');
+    choiceWrapperRef.classList.add('bg-success');
 }
 
-function toggleBookLikeIcon(bookIndex, bookLikeStatus) {
-    let imgSource = 'assets/icons/favorite-' + bookLikeStatus + '.svg';
-    document.getElementById('bookLikeIcon-' + bookIndex).src = imgSource;
+function updatesOnFalseChoice(choiceWrapperRef, correctChoice) {
+    choiceWrapperRef.classList.add('bg-danger');
+    let correctChoiceWrapperRef = document.getElementById('choiceWrapper-' + correctChoice);
+    setTimeout(function() {
+        correctChoiceWrapperRef.classList.add('bg-success')
+        correctChoiceWrapperRef.classList.add('anim-pulse')
+    }, 400);
 }
 
-function saveBookLikesToStorage(bookIndex, bookLikeStatus) {
-    bookTitleLiked = books[bookIndex].name;
-    bookTitlesLiked = getBookLikesFromStorage();
-    let index = -1;
-    if(bookTitlesLiked.length > 0) {
-        index = bookTitlesLiked.indexOf(bookTitleLiked);
-    }
-    if(bookLikeStatus) {
-        if (index < 0) {
-            bookTitlesLiked.push(bookTitleLiked);
-        }
+function showNextQuestion(currentQuestion) {
+    if(currentQuestion < totalQuestions) {
+        renderQuestion(currentQuestion);
     } else {
-        if (index >= 0) {
-            bookTitlesLiked.splice(index, 1);
-        }
+        renderResultScreen();
     }
-    localStorage.setItem("bookTitlesLiked", JSON.stringify(bookTitlesLiked));
+}
+
+function renderResultScreen() {
+    let resultWrapperRef = document.getElementById('resultWrapper');
+    resultWrapperRef.style = '';
+    let playWrapperRef = document.getElementById('playWrapper');
+    playWrapperRef.style = 'display: none !important';
 }
