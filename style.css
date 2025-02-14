@@ -1,7 +1,7 @@
 @import url("assets/fonts/fonts.css");
 @import url("styles/fw-presets.css");
 /*@import url("styles/fw-classes.css");*/
-@import url("node_modules\bootstrap\dist\css\bootstrap.min.css");
+@import url("node_modules/bootstrap/dist/css/bootstrap.min.css");
 @import url("styles/assets.css");
 
 
@@ -35,7 +35,7 @@
 }
 
 header, footer {
-    background-color: hsla(0, 68%, 63%, 0.3);
+    background-color: hsla(36, 90%, 60%, 0.8);
 }
 header .logo-wrapper .logo-goninski {
     height: 48px;
