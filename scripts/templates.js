@@ -10,9 +10,28 @@ function getChoicesTemplate(choiceNo, choiceText) {
 function getQuestionNavTemplate(currentQuestion) {
     return `
         <div id="questionPos" class="d-flex gap-2">
-        Frage <b>${currentQuestion}</b>von<b>${totalQuestions}</b>
+            Frage <b>${currentQuestion}</b>von<b>${totalQuestions}</b>           
         </div>
         <button id="btnNext" class="btn btn-dark" onclick="(showNextQuestion(${currentQuestion}))" disabled>Nächste Frage</button>
         </div>
+    `;
+}
+
+function getQuestionSuccessInfoTemplate() {
+    return `<b class="correct text-success">Super, korrekte Antwort !</b>`;
+}
+
+function getQuestionFalseInfoTemplate() {
+    return `<b class="false text-danger">ohh, leider falsche Antwort !</b>`;
+}
+
+function getResultInfoTemplate(correctChoices) {
+    return `<div>Du hast <b>${correctChoices}</b> von ${totalQuestions} Fragen korrekt beantwortet</div>`;
+}
+
+function getResultInfoChampTemplate() {
+    return `
+        <b class="champ fs-3 mb-3">** Glückwunsch **</b>
+        <b>Du hast alle Antworten korrekt beantwortet</b>
     `;
 }

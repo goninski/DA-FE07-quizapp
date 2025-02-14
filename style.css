@@ -10,6 +10,7 @@
 
     --pad-y-sec: 48px;
     --pad-y-sec-sm: 24px;
+    --width-ct: 719px;
 
     --ff-text: "Raleway";
     --ff-hd: var(--ff-text);
@@ -30,12 +31,14 @@
 
     --clr-text: white;
     --clr-hd: black;
+    --clr-primary: #bf0fa3;
     --bg-page: #333;
     --clr-red: hsl(0, 68%, 63%); /* #e16060 */
 }
 
 header, footer {
-    background-color: hsla(36, 90%, 60%, 0.8);
+    background-color: var(--clr-primary);
+    color: var(--clr-text);
 }
 header .logo-wrapper .logo-goninski {
     height: 48px;
@@ -72,16 +75,34 @@ h4 {
     cursor: auto;
 }
 .choiceWrapper.anim-pulse {
-    animation: pulse 500ms 2;
+    animation: pulse 700ms 2;
+}
+.bg-danger, .bg-success {
+    color: white;
+}
+.progress-bar {
+    background-color: var(--clr-primary);
 }
 
-
+@media(max-width: 719px) {
+    .section {
+        --pad-x-sec: 0;
+    }
+    .section .ct-container {
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+    }
+}
 @media(max-width: 511px) {
     header h1 {
         font-size: 1.3rem;
     }
 }
 @media(max-width: 359px) {
+    .section .ct-container {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
     header h1 {
         font-size: 1.2rem;
     }

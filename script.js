@@ -1,8 +1,13 @@
+let audioSuccess = new Audio('assets/audio/success-221935_PB.mp3');
+let audioError = new Audio('assets/audio/ErrorToneBuzz_KF.wav');
+let audioChamp = new Audio('assets/audio/ApplauseCheerSmall_KF.wav');
+
 function init() {
     renderQuestion(0);
 }
 
 function renderQuestion(currentQuestion) {
+    choiceCount = 0;
     currentQuestion++;
     questionIndex = currentQuestion - 1;
     renderQuestionText(questionIndex);
@@ -18,7 +23,13 @@ function renderQuestionText(questionIndex) {
 function renderChoices(questionIndex) {
     let choicesWrapperRef = document.getElementById('choicesWrapper');
     choicesWrapperRef.innerHTML = '';
+    let successInfoRef = document.getElementById('successInfo');
+    successInfoRef.innerHTML = '';
     getQuestionArray(questionIndex);
+    renderChoiceItems(choicesWrapperRef);
+}
+
+function renderChoiceItems(choicesWrapperRef) {
     for (choiceIndex = choiceStartIndex; choiceIndex < questionArr.length; choiceIndex++) {
         choiceNo = choiceIndex - choiceIndexOffset;
         choiceText = questionObj['choice_' + choiceNo];
@@ -36,31 +47,51 @@ function renderQuestionNav(questionIndex) {
     questionNavRef.innerHTML = getQuestionNavTemplate(questionIndex + 1);
 }
 
+function updateProgressBar(currentQuestion) {
+    progress = currentQuestion / totalQuestions * 100;
+    let progressBarRef = document.getElementById('progressBar');
+    progressBarRef.style = 'width: ' + progress + '%';
+    progressBarRef.innerText = progress + '%';
+    if(currentQuestion == totalQuestions) {
+        setTimeout(function() {renderResultScreen(correctChoices);}, 3000);
+    }
+}
+
 function getQuestionArray(questionIndex) {
     questionObj = questions[questionIndex];
     questionArr = Object.keys(questionObj);
 }
 
 function validateUserChoice(choiceNo) {
-    let choiceWrapperRef = document.getElementById('choiceWrapper-' + choiceNo);
-    correctChoice = questionObj.correctChoice;
-    if(correctChoice == choiceNo) {
-        updatesOnCorrectChoice(choiceWrapperRef);
-    } else {
-        updatesOnFalseChoice(choiceWrapperRef, correctChoice);
+    choiceCount++;
+    if(choiceCount == 1) {
+        let choicesWrapperRef = document.getElementById('choicesWrapper');
+        choicesWrapperRef.classList.add('disabled');
+        let choiceWrapperRef = document.getElementById('choiceWrapper-' + choiceNo);
+        let successInfoRef = document.getElementById('successInfo');
+        let btnNextRef = document.getElementById('btnNext');
+        btnNextRef.disabled = false;
+        correctChoice = questionObj.correctChoice;
+        if(correctChoice == choiceNo) {
+            updatesOnCorrectChoice(choiceWrapperRef, successInfoRef);
+        } else {
+            updatesOnFalseChoice(choiceWrapperRef, successInfoRef, correctChoice);
+        }
+        updateProgressBar(currentQuestion++);
     }
-    let btnNextRef = document.getElementById('btnNext');
-    btnNextRef.disabled = false;
 }
 
-function updatesOnCorrectChoice(choiceWrapperRef) {
-    let choicesWrapperRef = document.getElementById('choicesWrapper');
-    choicesWrapperRef.classList.add('disabled');
+function updatesOnCorrectChoice(choiceWrapperRef, successInfoRef) {
+    correctChoices++;
     choiceWrapperRef.classList.add('bg-success');
+    audioSuccess.play();
+    successInfoRef.innerHTML = getQuestionSuccessInfoTemplate();
 }
 
-function updatesOnFalseChoice(choiceWrapperRef, correctChoice) {
+function updatesOnFalseChoice(choiceWrapperRef, successInfoRef, correctChoice) {
     choiceWrapperRef.classList.add('bg-danger');
+    audioError.play();
+    successInfoRef.innerHTML = getQuestionFalseInfoTemplate();
     let correctChoiceWrapperRef = document.getElementById('choiceWrapper-' + correctChoice);
     setTimeout(function() {
         correctChoiceWrapperRef.classList.add('bg-success')
@@ -72,13 +103,25 @@ function showNextQuestion(currentQuestion) {
     if(currentQuestion < totalQuestions) {
         renderQuestion(currentQuestion);
     } else {
-        renderResultScreen();
+        updateProgressBar(currentQuestion)
+        renderResultScreen(correctChoices);
     }
 }
 
-function renderResultScreen() {
+function renderResultScreen(correctChoices) {
     let resultWrapperRef = document.getElementById('resultWrapper');
     resultWrapperRef.style = '';
     let playWrapperRef = document.getElementById('playWrapper');
     playWrapperRef.style = 'display: none !important';
+    let resultInfoRef = document.getElementById('resultInfo');
+    if(correctChoices == totalQuestions) {
+        resultInfoRef.innerHTML = getResultInfoChampTemplate();
+        audioChamp.play();
+    } else {
+        resultInfoRef.innerHTML = getResultInfoTemplate(correctChoices);
+    }
+}
+
+function restartGame() {
+    location.reload();
 }

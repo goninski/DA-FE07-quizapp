@@ -1,4 +1,3 @@
-// let questionNo = 1;
 let currentQuestion = 1;
 let questionIndex = 0;
 let questionObj = {};
@@ -12,6 +11,8 @@ let choiceIndexOffset = 1;
 let choiceStartIndex = 2;
 let choiceIndex = 2;
 let choiceText = '';
+let choiceCount = 0;
+let progress = 0;
 
 let questions = [
   {
