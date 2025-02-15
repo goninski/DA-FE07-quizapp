@@ -4,6 +4,8 @@ a JS test project in context of the DA frontend masterclass
 
 Simple Quiz App
 
+data base = json object
+
 Features:
 - datahandling allows dynamic numbers of questions AND choices
 - progress bar
