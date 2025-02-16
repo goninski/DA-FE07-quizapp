@@ -1,3 +1,20 @@
+let currentQuestion = 1;
+let questionIndex = 0;
+let questionObj = {};
+let questionArr = [];
+let questionText = '';
+let correctChoice = 0;
+let correctChoices = 0;
+let choicesTotal = 1;
+let choiceNo = 1;
+let choiceIndexOffset = 1;
+let choiceStartIndex = 2;
+let choiceIndex = 2;
+let choiceText = '';
+let choiceCount = 0;
+let progress = 0;
+let totalQuestions = questions.length;
+
 let audioSuccess = new Audio('assets/audio/success-221935_PB.mp3');
 let audioError = new Audio('assets/audio/ErrorToneBuzz_KF.wav');
 let audioChamp = new Audio('assets/audio/ApplauseCheerSmall_KF.wav');

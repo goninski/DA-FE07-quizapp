@@ -1,53 +1,74 @@
-let currentQuestion = 1;
-let questionIndex = 0;
-let questionObj = {};
-let questionArr = [];
-let questionText = '';
-let correctChoice = 0;
-let correctChoices = 0;
-let choicesTotal = 1;
-let choiceNo = 1;
-let choiceIndexOffset = 1;
-let choiceStartIndex = 2;
-let choiceIndex = 2;
-let choiceText = '';
-let choiceCount = 0;
-let progress = 0;
-
 let questions = [
   {
-    "question": "Frage 1 ?",
+    "question": "Welches ist die Hauptstadt von Deutschland?",
     "correctChoice": 1,
-    "choice_1": "Auswahl 1",
-    "choice_2": "Auswahl 2",
-    "choice_3": "Auswahl 3",
-    "choice_4": "Auswahl 4",
+    "choice_1": "Berlin",
+    "choice_2": "München",
+    "choice_3": "Hamburg",
+    "choice_4": "Köln"
   },
   {
-    "question": "Frage 2 ?",
-    "correctChoice": 2,
-    "choice_1": "Auswahl 1",
-    "choice_2": "Auswahl 2",
-    "choice_3": "Auswahl 3",
-    // "choice_4": "Auswahl 4",
+    "question": "Welcher Planet ist der Erde am nächsten?",
+    "correctChoice": 1,
+    "choice_1": "Venus",
+    "choice_2": "Mars",
+    "choice_3": "Jupiter"
   },
   {
-    "question": "Frage 3 ?",
+    "question": "Wer schrieb 'Romeo und Julia'?",
+    "correctChoice": 1,
+    "choice_1": "William Shakespeare",
+    "choice_2": "Charles Dickens",
+    "choice_3": "Jane Austen"
+  },
+  {
+    "question": "Wie lautet die chemische Formel für Wasser?",
+    "correctChoice": 1,
+    "choice_1": "H2O",
+    "choice_2": "CO2",
+    "choice_3": "NaCl"
+  },
+  {
+    "question": "In welchem Jahr begann der Zweite Weltkrieg?",
+    "correctChoice": 1,
+    "choice_1": "1939",
+    "choice_2": "1941",
+    "choice_3": "1945"
+  },
+  {
+    "question": "Welches ist das höchste Gebirge der Welt?",
+    "correctChoice": 1,
+    "choice_1": "Mount Everest",
+    "choice_2": "K2",
+    "choice_3": "Matterhorn"
+  },
+  {
+    "question": "Wer malte die Mona Lisa?",
+    "correctChoice": 1,
+    "choice_1": "Leonardo da Vinci",
+    "choice_2": "Michelangelo"
+  },
+  {
+    "question": "Was ist die Hauptstadt von Australien?",
     "correctChoice": 3,
-    "choice_1": "Auswahl 1",
-    "choice_2": "Auswahl 2",
-    "choice_3": "Auswahl 3",
-    // "choice_4": "Auswahl 4",
+    "choice_1": "Sydney",
+    "choice_2": "Melbourne",
+    "choice_3": "Canberra",
+    "choice_4": "Perth"
   },
   {
-    "question": "Frage 4 ?",
-    "correctChoice": 4,
-    "choice_1": "Auswahl 1",
-    "choice_2": "Auswahl 2",
-    "choice_3": "Auswahl 3",
-    "choice_4": "Auswahl 4",
-    "choice_5": "Auswahl 5",
+    "question": "Welches ist das grösste Säugetier der Welt?",
+    "correctChoice": 2,
+    "choice_1": "Elefant",
+    "choice_2": "Blauwal",
+    "choice_3": "Giraffe"
+  },
+  {
+    "question": "Wer entwickelte die Relativitätstheorie?",
+    "correctChoice": 2,
+    "choice_1": "Isaac Newton",
+    "choice_2": "Albert Einstein",
+    "choice_3": "Galileo Galilei"
   }
-];
+]
 
-let totalQuestions = questions.length;
