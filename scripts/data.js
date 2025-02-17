@@ -9,23 +9,23 @@ let questions = [
   },
   {
     "question": "Welcher Planet ist der Erde am nächsten?",
-    "correctChoice": 1,
-    "choice_1": "Venus",
-    "choice_2": "Mars",
-    "choice_3": "Jupiter"
+    "correctChoice": 3,
+    "choice_1": "Mars",
+    "choice_2": "Jupiter",
+    "choice_3": "Venus",
   },
   {
     "question": "Wer schrieb 'Romeo und Julia'?",
-    "correctChoice": 1,
-    "choice_1": "William Shakespeare",
-    "choice_2": "Charles Dickens",
+    "correctChoice": 2,
+    "choice_1": "Charles Dickens",
+    "choice_2": "William Shakespeare",
     "choice_3": "Jane Austen"
   },
   {
     "question": "Wie lautet die chemische Formel für Wasser?",
-    "correctChoice": 1,
-    "choice_1": "H2O",
-    "choice_2": "CO2",
+    "correctChoice": 2,
+    "choice_1": "CO2",
+    "choice_2": "H2O",
     "choice_3": "NaCl"
   },
   {
@@ -37,10 +37,10 @@ let questions = [
   },
   {
     "question": "Welches ist das höchste Gebirge der Welt?",
-    "correctChoice": 1,
-    "choice_1": "Mount Everest",
+    "correctChoice": 3,
+    "choice_1": "Matterhorn",
     "choice_2": "K2",
-    "choice_3": "Matterhorn"
+    "choice_3": "Mount Everest",
   },
   {
     "question": "Wer malte die Mona Lisa?",

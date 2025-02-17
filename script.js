@@ -23,6 +23,11 @@ function init() {
     renderQuestion(0);
 }
 
+function init_test() {
+    totalQuestions = 1;
+    renderQuestion(totalQuestions - 1);
+}
+
 function renderQuestion(currentQuestion) {
     choiceCount = 0;
     currentQuestion++;
@@ -126,12 +131,15 @@ function showNextQuestion(currentQuestion) {
 }
 
 function renderResultScreen(correctChoices) {
-    let resultWrapperRef = document.getElementById('resultWrapper');
-    resultWrapperRef.style = '';
+    // let resultWrapperRef = document.getElementById('resultWrapper');
+    // resultWrapperRef.style = '';
+    document.getElementById('resultWrapper').style = '';
     let playWrapperRef = document.getElementById('playWrapper');
     playWrapperRef.style = 'display: none !important';
+    let resultImgRef = document.getElementById('resultImg');
     let resultInfoRef = document.getElementById('resultInfo');
     if(correctChoices == totalQuestions) {
+        resultImgRef.src = 'assets/img/trophy-champ.png';
         resultInfoRef.innerHTML = getResultInfoChampTemplate();
         audioChamp.play();
     } else {
