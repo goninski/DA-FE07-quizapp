@@ -20,12 +20,16 @@ let audioError = new Audio('assets/audio/ErrorToneBuzz_KF.wav');
 let audioChamp = new Audio('assets/audio/ApplauseCheerSmall_KF.wav');
 
 function init() {
-    renderQuestion(0);
+    renderStartScreen;
 }
 
-function init_test() {
-    totalQuestions = 1;
-    renderQuestion(totalQuestions - 1);
+function renderStartScreen() {
+}
+
+function startGame() {
+    document.getElementById('startWrapper').style = 'display: none !important';
+    document.getElementById('playWrapper').style = '';
+    renderQuestion(0);
 }
 
 function renderQuestion(currentQuestion) {

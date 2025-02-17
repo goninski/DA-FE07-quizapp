@@ -31,11 +31,25 @@
 
     --clr-text: white;
     --clr-hd: black;
-    --clr-primary: #bf0fa3;
+    /* --clr-primary: #bf0fa3; */
+    --clr-primary: #82b9cf;
     --bg-page: #333;
     --clr-red: hsl(0, 68%, 63%); /* #e16060 */
 }
 
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-image: url(assets/img/quiz-wallpaper.jpg);
+    opacity: 0.2;
+}
+body > * {
+    z-index: 1;
+}
 header, footer {
     background-color: var(--clr-primary);
     color: var(--clr-text);
@@ -49,7 +63,7 @@ header h1 {
     margin-bottom: 4px;
 }
 .footer-links a {
-    color: #ccc;
+    color: #ddd;
 }
 .footer-links a:hover {
     color: var(--clr-text);
@@ -63,6 +77,10 @@ h4 {
     font-size: var(--fs-text-lg);
 }
 
+#quizContainer {
+    background-color: hsla(0, 0%, 90%, 0.8);
+}
+
 #resultWrapper img {
     object-fit: contain;
     height: 280px;
@@ -70,6 +88,10 @@ h4 {
 }
 .choiceWrapper {
     cursor: pointer;
+    background-color: hsla(0, 0%, 95%, 0.80);
+}
+.choiceWrapper:hover {
+    background-color: hsla(0, 0%, 90%, 0.85);
 }
 #choicesWrapper.disabled .choiceWrapper {
     cursor: auto;
@@ -80,8 +102,15 @@ h4 {
 .bg-danger, .bg-success {
     color: white;
 }
+.progress {
+    background-color: hsla(0, 0%, 95%, 0.80) !important;
+}
 .progress-bar {
     background-color: var(--clr-primary);
+}
+.progress-label {
+    margin-top: -16px;
+    font-size: var(--fs-text-sm);
 }
 
 @media(max-width: 719px) {
