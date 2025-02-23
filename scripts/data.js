@@ -12,7 +12,7 @@ let questions = [
     "correctChoice": 3,
     "choice_1": "Mars",
     "choice_2": "Jupiter",
-    "choice_3": "Venus",
+    "choice_3": "Venus"
   },
   {
     "question": "Wer schrieb 'Romeo und Julia'?",
@@ -40,7 +40,7 @@ let questions = [
     "correctChoice": 3,
     "choice_1": "Matterhorn",
     "choice_2": "K2",
-    "choice_3": "Mount Everest",
+    "choice_3": "Mount Everest"
   },
   {
     "question": "Wer malte die Mona Lisa?",
