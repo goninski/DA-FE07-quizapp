@@ -21,7 +21,6 @@ let audioChamp = new Audio('assets/audio/ApplauseCheerSmall_KF.wav');
 
 function init() {
     renderStartScreen;
-    setHomeURL();
 }
 
 function renderStartScreen() {
@@ -154,24 +153,4 @@ function renderResultScreen(correctChoices) {
 
 function restartGame() {
     location.reload();
-}
-
-function setHomeURL() {
-    let url = new URL(window.location.href);
-    let homeURL = setCondHomeURL(url);
-    let homeLinksRef = document.querySelectorAll('.js-set-home-url');
-    for (let i=0; i < homeLinksRef.length; i++) {
-        homeLinksRef[i].href = homeURL;
-    }
-}
-
-function setCondHomeURL(url) {
-    switch(url.hostname) {
-        case "127.0.0.1":
-            return url.origin + '/' + url.pathname.split("/")[1];
-        case "francois-gonin.developerakademie.net":
-            return url.origin + '/' + url.pathname.split("/")[1] + '/' + url.pathname.split("/")[2];
-        default:
-            return '/';
-    }
 }
