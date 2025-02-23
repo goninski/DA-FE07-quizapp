@@ -159,7 +159,6 @@ function restartGame() {
 function setHomeURL() {
     let url = new URL(window.location.href);
     let homeURL = url;
-    console.log(url.hostname);
     switch(url.hostname) {
         case "127.0.0.1":
             homeURL = url.origin + '/' + url.pathname.split("/")[1];
@@ -170,6 +169,5 @@ function setHomeURL() {
         default:
             homeURL = '/';
     }
-    let homeLink = document.querySelector('.js-set-home-url');
-    homeLink.href = homeURL;
+    document.querySelector('.js-set-home-url').href = homeURL;
 }
